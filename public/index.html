@@ -1,41 +1,150 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#09070d"><title>AmiRa ❤️</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#070509">
+  <meta name="description" content="A little place where Amita can come and find Rahul. ❤️">
+  <title>AmiRa ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <main class="shell">
-    <section id="auth" class="card auth-card">
-      <div class="heart">♥</div><p class="eyebrow">A PRIVATE LITTLE UNIVERSE</p>
-      <h1>AmiRa</h1><p class="sub">Even when Rahul isn't physically here, a little piece of him is always here for you.</p>
-      <div class="tabs"><button class="active" data-mode="login">Login</button><button data-mode="register">Create account</button></div>
-      <form id="authForm">
-        <input id="name" placeholder="Your name" autocomplete="name" hidden>
-        <input id="email" type="email" placeholder="Email" autocomplete="email" required>
-        <input id="password" type="password" placeholder="Password (10+ characters)" autocomplete="current-password" required minlength="10">
-        <button class="primary" type="submit" id="submit">Come in ❤️</button>
-        <p id="error" class="error"></p>
-      </form>
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+  <div id="intro" class="screen intro-screen" aria-live="polite">
+    <div class="intro-glow"></div>
+    <div class="intro-content">
+      <p id="introLine" class="intro-line">Amita...</p>
+      <p id="introSub" class="intro-sub">bas ek minute.</p>
+      <button id="enterBtn" class="enter-btn" type="button">Aaja mere paas <span>→</span></button>
+    </div>
+  </div>
+
+  <main id="app" class="app hidden">
+    <header class="nav">
+      <button class="brand" data-scroll="top" type="button" aria-label="AmiRa home">AmiRa <span>♥</span></button>
+      <button id="musicToggle" class="music-pill" type="button" aria-label="Toggle romantic music"><span class="music-dot"></span><span id="musicLabel">Music</span></button>
+    </header>
+
+    <section id="top" class="hero section-pad">
+      <div class="hero-heart">♥</div>
+      <p class="kicker">YOUR LITTLE UNIVERSE</p>
+      <h1>Hey, <em>Amita.</em></h1>
+      <p class="hero-copy">Jab bhi mujhe miss karo... yahan aa jana.<br>Thodi der ke liye bas hum dono.</p>
+      <button id="needRahul" class="primary-cta" type="button"><span>I NEED RAHUL</span> <b>♥</b></button>
+      <p id="experience" class="experience" aria-live="polite">Aaj kya chahiye, Baby?</p>
+      <div class="swipe-hint">scroll slowly <span>↓</span></div>
     </section>
 
-    <section id="home" hidden>
-      <header class="top"><div><span class="eyebrow">AMIRA</span><h2 id="greeting">Hey, Baby.</h2></div><button id="logout" class="ghost">Leave quietly</button></header>
-      <section class="hero card">
-        <div class="orb">♥</div><p class="eyebrow">FOR THE MOMENTS YOU MISS ME</p>
-        <h1>Come a little closer...</h1><p>Phone ko thoda paas rakho. Bas thodi der yahin raho.</p>
-        <button id="need" class="primary big">I NEED RAHUL ❤️</button>
-        <div id="experience" class="experience"></div>
-      </section>
-      <section class="grid">
-        <article class="card mini"><span>🫂</span><h3>FEEL ME NEAR YOU</h3><p>Ek tight hug. Bas.</p><button data-exp="hug">Open</button></article>
-        <article class="card mini"><span>❤️</span><h3>YOU ARE MY COMFORT</h3><p>Jyada mat socho. Main hu na.</p><button data-exp="comfort">Open</button></article>
-        <article class="card mini"><span>🌙</span><h3>CAN'T SLEEP?</h3><p>Raat thodi soft karte hain.</p><button data-exp="night">Open</button></article>
-      </section>
-      <section class="card memories"><div class="section-head"><div><p class="eyebrow">YOUR PRIVATE SPACE</p><h2>Little things</h2></div><button id="addMemory" class="ghost">+ Add</button></div><div id="memoryList"></div></section>
+    <section class="quick-grid section-pad">
+      <button class="experience-card" data-experience="hug" type="button"><span>🫂</span><strong>FEEL ME<br>NEAR YOU</strong><small>ek tight hug</small></button>
+      <button class="experience-card" data-experience="sad" type="button"><span>♥</span><strong>WHEN YOU'RE<br>SAD</strong><small>Me hu na.</small></button>
+      <button class="experience-card" data-experience="night" type="button"><span>☾</span><strong>2 AM<br>ZONE</strong><small>raat wali baatein</small></button>
+      <button class="experience-card" data-experience="love" type="button"><span>∞</span><strong>WHY I<br>LOVE YOU</strong><small>thoda sa secret</small></button>
     </section>
+
+    <section id="hug" class="feature-section hug-section">
+      <div class="feature-inner">
+        <p class="kicker">NO SCREEN BETWEEN US</p>
+        <h2>Hold for a hug.</h2>
+        <p class="feature-copy">Phone ko thoda paas rakho.<br>Ab button ko hold karo... main aa raha hu.</p>
+        <button id="hugHold" class="hug-button" type="button" aria-label="Hold for a hug"><span>🫂</span><small>HOLD FOR HUG</small></button>
+        <p id="hugText" class="hug-text">Bas... yahin raho.</p>
+      </div>
+    </section>
+
+    <section id="near" class="near-section section-pad">
+      <div class="glass-panel">
+        <p class="kicker">FEEL ME NEAR YOU</p>
+        <div class="near-heart">♥</div>
+        <div id="nearSteps" class="near-steps" aria-live="polite">
+          <p>Amita...</p><p>Phone ko thoda paas rakho.</p><p>Ab aankhein band karo...</p><p>Imagine...</p>
+        </div>
+        <button id="nearBtn" class="outline-cta" type="button">Come closer</button>
+      </div>
+    </section>
+
+    <section id="night" class="night-section section-pad">
+      <div class="night-card">
+        <div class="moon">☾</div>
+        <p class="kicker">2 AM / NIGHTTIME</p>
+        <h2 id="nightTitle">Raat ko sab thoda zyada feel hota hai.</h2>
+        <p id="nightText">Agar neend nahi aa rahi... idhar aao. Kuch solve nahi karna. Bas mere saath raho.</p>
+        <button class="outline-cta" data-experience="night" type="button">Stay with me</button>
+      </div>
+    </section>
+
+    <section id="sad" class="comfort-section section-pad">
+      <div class="comfort-card">
+        <p class="kicker">WHEN YOU'RE SAD</p>
+        <h2>Hey... idhar dekho.</h2>
+        <p id="comfortText">Jyada mat socho, Baby. Chill... shant ho jao. Me hu na.</p>
+        <button class="soft-cta" data-experience="sad" type="button">Haan, I'm here</button>
+      </div>
+    </section>
+
+    <section id="love" class="love-section section-pad">
+      <p class="kicker">A LITTLE SECRET</p>
+      <h2>Why I love you.</h2>
+      <p class="section-intro">Sab ek saath nahi bataunga. Ek-ek karke suno.</p>
+      <div id="loveReveal" class="reveal-card"><span>?</span><p>Tap to reveal</p></div>
+      <p class="reveal-count" id="loveCount">01 / 10</p>
+    </section>
+
+    <section id="universe" class="universe-section section-pad">
+      <div class="section-heading"><p class="kicker">AMI + RA =</p><h2>Our Little Universe.</h2></div>
+      <div class="universe-grid">
+        <div><b>01</b><strong>Online se real</strong><p>Hum mile online. Phir feelings ne distance ka logic hi bigaad diya.</p></div>
+        <div><b>02</b><strong>Long calls</strong><p>Overnight video calls. Kabhi words kam, presence zyada.</p></div>
+        <div><b>03</b><strong>Shared corners</strong><p>Instagram. Telegram. Chhoti digital jagahen jo somehow humari ho gayi.</p></div>
+        <div><b>04</b><strong>Distance</strong><p>Kabhi baat nahi hui. Aur phir samajh aaya ki ek dusre ki value kitni hai.</p></div>
+      </div>
+    </section>
+
+    <section id="oneDay" class="future-section section-pad">
+      <div class="future-orb">♥</div>
+      <p class="kicker">ONE DAY</p>
+      <h2>No screen between us.</h2>
+      <p id="futureText">Main imagine karta hu... jab pehli baar tum mere saamne hogi. No buffering. No network problem. Bas tum. Main. Aur woh hug jiska wait hai.</p>
+      <button class="outline-cta" data-experience="future" type="button">Imagine with me</button>
+    </section>
+
+    <section id="passion" class="passion-section section-pad">
+      <div class="passion-content">
+        <p class="kicker">COME A LITTLE CLOSER...</p>
+        <h2>Aaj thoda aur paas.</h2>
+        <p id="passionText">Kuch moments ko jaldi nahi karte. Bas paas aate hain... thoda aur... aur phir bas ek dusre ki presence feel karte hain.</p>
+        <button class="primary-cta" data-experience="passion" type="button"><span>Come closer</span> <b>♥</b></button>
+      </div>
+    </section>
+
+    <section id="music" class="music-section section-pad">
+      <div class="music-card">
+        <p class="kicker">FOR THE MOOD</p>
+        <h2>Thoda music. Thoda hum.</h2>
+        <p>Apna favourite Hindi romantic track yahan replace kar sakti ho.</p>
+        <audio id="audio" controls preload="metadata">
+          <source src="/music/romantic.mp3" type="audio/mpeg">
+        </audio>
+        <label class="music-source">Music source: <code>/music/romantic.mp3</code></label>
+        <button id="playMusic" class="soft-cta" type="button">Play / Pause</button>
+      </div>
+    </section>
+
+    <section class="final-section section-pad">
+      <div class="final-heart">♥</div>
+      <p class="kicker">WHenever you miss me</p>
+      <h2>Come here.</h2>
+      <p>Mujhe nahi pata main tumse itna kyun pyaar karta hu.<br><br>Bas itna pata hai... jab tum nahi hoti, kuch missing sa lagta hai. Jab tum hoti ho, sab thoda better lagta hai.</p>
+      <p class="signature">I am with you, Meri Amita. ❤️</p>
+      <button class="primary-cta" data-scroll="top" type="button"><span>Come back to me</span> <b>♥</b></button>
+    </section>
+
+    <footer>AmiRa · a digital hug from Rahul to Amita ❤️</footer>
   </main>
-  <script src="/app.js"></script>
+  <script src="/app.js" defer></script>
 </body>
 </html>
