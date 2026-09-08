@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="v6.css">
 </head>
 <body>
 <div id="world" aria-hidden="true"><div class="grain"></div><div class="aurora aurora-a"></div><div class="aurora aurora-b"></div><div id="stars"></div></div>
@@ -20,17 +21,10 @@
   <div class="intro-scene"><div class="intro-heart">♥</div><div class="intro-line"></div><p>Do log online mile the.<br><span>Baaki universe ne khud likha.</span></p><button id="enter" class="enter">Aao, Baby <b>→</b></button></div>
 </section>
 <main id="app" hidden>
-  <header class="topbar"><button class="wordmark" data-room="home">AmiRa <span>♥</span></button><div class="top-actions"><button id="sound" aria-label="Sound on or off">Sound <i>off</i></button><button id="settings" aria-label="Settings">•••</button></div></header>
-  <div id="view" class="view"></div>
-  <div class="room-orbit" aria-label="Universe navigation">
-    <button data-room="feel"><span>♡</span><small>FEEL</small></button>
-    <button data-room="love"><span>✉</span><small>LOVE</small></button>
-    <button id="surprise"><span>♥</span><small>RANDOM</small></button>
-    <button data-room="play"><span>✦</span><small>PLAY</small></button>
-    <button data-room="night"><span>☾</span><small>NIGHT</small></button>
-  </div>
-  <div id="modal" class="modal" hidden></div>
-  <div id="toast" class="toast" role="status"></div>
+<header class="topbar"><button class="wordmark" data-room="home">AmiRa <span>♥</span></button><div class="top-actions"><button id="sound" aria-label="Sound on or off">Sound <i>on</i></button><button id="settings" aria-label="Settings">•••</button></div></header>
+<div id="view" class="view"></div>
+<div id="modal" class="modal" hidden></div>
+<div id="toast" role="status"></div>
 </main>
 <script src="app.js" defer></script>
 </body>
