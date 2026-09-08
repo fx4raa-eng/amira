@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#09070d"><title>AmiRa ❤️</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section id="auth" class="card auth-card">
+      <div class="heart">♥</div><p class="eyebrow">A PRIVATE LITTLE UNIVERSE</p>
+      <h1>AmiRa</h1><p class="sub">Even when Rahul isn't physically here, a little piece of him is always here for you.</p>
+      <div class="tabs"><button class="active" data-mode="login">Login</button><button data-mode="register">Create account</button></div>
+      <form id="authForm">
+        <input id="name" placeholder="Your name" autocomplete="name" hidden>
+        <input id="email" type="email" placeholder="Email" autocomplete="email" required>
+        <input id="password" type="password" placeholder="Password (10+ characters)" autocomplete="current-password" required minlength="10">
+        <button class="primary" type="submit" id="submit">Come in ❤️</button>
+        <p id="error" class="error"></p>
+      </form>
+    </section>
+
+    <section id="home" hidden>
+      <header class="top"><div><span class="eyebrow">AMIRA</span><h2 id="greeting">Hey, Baby.</h2></div><button id="logout" class="ghost">Leave quietly</button></header>
+      <section class="hero card">
+        <div class="orb">♥</div><p class="eyebrow">FOR THE MOMENTS YOU MISS ME</p>
+        <h1>Come a little closer...</h1><p>Phone ko thoda paas rakho. Bas thodi der yahin raho.</p>
+        <button id="need" class="primary big">I NEED RAHUL ❤️</button>
+        <div id="experience" class="experience"></div>
+      </section>
+      <section class="grid">
+        <article class="card mini"><span>🫂</span><h3>FEEL ME NEAR YOU</h3><p>Ek tight hug. Bas.</p><button data-exp="hug">Open</button></article>
+        <article class="card mini"><span>❤️</span><h3>YOU ARE MY COMFORT</h3><p>Jyada mat socho. Main hu na.</p><button data-exp="comfort">Open</button></article>
+        <article class="card mini"><span>🌙</span><h3>CAN'T SLEEP?</h3><p>Raat thodi soft karte hain.</p><button data-exp="night">Open</button></article>
+      </section>
+      <section class="card memories"><div class="section-head"><div><p class="eyebrow">YOUR PRIVATE SPACE</p><h2>Little things</h2></div><button id="addMemory" class="ghost">+ Add</button></div><div id="memoryList"></div></section>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
