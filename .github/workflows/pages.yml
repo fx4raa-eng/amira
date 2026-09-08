@@ -1,4 +1,4 @@
-name: Deploy AmiRa V2 to GitHub Pages
+name: Deploy AmiRa V3 to GitHub Pages
 
 on:
   push:
@@ -16,14 +16,14 @@ concurrency:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Configure Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload public frontend
         uses: actions/upload-pages-artifact@v4
