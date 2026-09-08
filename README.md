@@ -1,50 +1,42 @@
-# AmiRa ❤️
+# AmiRa V4 — Living Love Universe
 
-AmiRa is a private, mobile-first romantic web experience for Rahul and Amita.
+AmiRa is a private, mobile-first romantic web experience created by Rahul for Amita.
 
-## Version 1
-
-The user-facing experience requires **no login, registration, password, account, or personal information**. Open the website and enter the experience.
-
-Included:
-
-- Cinematic black/deep-red opening: Amita → Baby → Babu → Aaja mere paas
-- AmiRa ❤️ identity and mobile-first home
-- `I NEED RAHUL ❤️` randomized experience engine
-- 40+ romantic, reassurance, missing-you, playful, nighttime and future messages
-- LocalStorage anti-repeat memory across visits
-- Hold-for-hug interaction with touch/pointer support and optional vibration
-- Feel Me Near You guided interaction
-- Device-time-aware nighttime / 2 AM mode
-- When You're Sad reassurance
-- Why I Love You reveal sequence
-- Our Little Universe story, using only the supplied real relationship context
-- One Day future section
-- Passionate-but-tasteful romantic section
-- User-replaceable Hindi romantic music slot at `public/music/romantic.mp3`
-- Subtle idle surprises
+## V4 architecture
+- Living universe instead of a page collection
+- Home objects act as room portals
+- Time-aware greeting and night mode
+- Mood-aware comfort, romance, play and surprise flows
+- Local-first adaptive state under `amira_v4`
+- Weighted/no-immediate-repeat experience selection
+- 25 mini-games and expandable content collections
+- Love letters, Why I Love You, Kiss, CLOSER, If You Were Here and Stay Awhile
+- Future meeting scenes are explicitly imagination, never fabricated memories
+- Touch-first Hug interaction with haptics where supported
+- Local Web Audio interaction sounds with browser-safe user-gesture initialization
+- Music room accepts only user-owned/licensed files placed in `public/music/`
+- Page Visibility handling resumes music only when it was playing before the tab was hidden
 - Reduced-motion support
-- GitHub Pages workflow for free static hosting
-
-## Run locally
-
-Node 20+:
-
-```bash
-npm install
-npm start
-```
-
-Then open `http://localhost:3000`.
-
-The existing Express/SQLite/authentication backend is retained for future private/admin expansion, but Version 1 does not call it for the public experience.
-
-## GitHub Pages
-
-The workflow at `.github/workflows/pages.yml` publishes the `public` directory. Enable GitHub Pages for **GitHub Actions** in repository Settings if it is not already enabled. After the first successful workflow run, the project URL will normally be:
-
-`https://fx4raa-eng.github.io/amira/`
+- GitHub Pages deployment from `public/`
+- Existing Node/Express/SQLite backend remains untouched; the public V4 experience does not require it
 
 ## Music
+The repository intentionally does not bundle copyrighted commercial songs. Add your own licensed/user-owned files such as:
+- `public/music/romantic.mp3`
+- `public/music/missing-you.mp3`
+- `public/music/late-night.mp3`
+- `public/music/stay-with-me.mp3`
 
-Add a user-owned or licensed MP3 as `public/music/romantic.mp3`. The player is already wired to that path.
+If a file is missing, the Music Room fails gracefully instead of breaking the app.
+
+## Local state
+V4 stores experience progress, recent selections, unlocks, achievements, music preference and local answers in the browser only. No private romantic content is sent to a remote service by the public frontend.
+
+## GitHub Pages
+The Pages workflow publishes `./public` using GitHub Actions. All frontend asset paths are project-relative so the app works at a repository Pages URL.
+
+## Browser audio behavior
+Modern browsers may block audible autoplay. AmiRa initializes Web Audio from user interaction and exposes sound/music controls rather than bypassing browser policy.
+
+## Content rule
+The app does not invent physical memories. Rahul and Amita's first physical meeting, first real hug and future shared travel remain future experiences until they actually happen.

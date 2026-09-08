@@ -1,4 +1,4 @@
-name: Deploy AmiRa V3 to GitHub Pages
+name: Deploy AmiRa V4 to GitHub Pages
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload public frontend
+      - name: Upload static AmiRa frontend
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./public

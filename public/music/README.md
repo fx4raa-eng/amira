@@ -1,7 +1,10 @@
-# AmiRa music
+# AmiRa music directory
 
-Put the user-owned/licensed Hindi romantic MP3 at:
+Place only music you own or are licensed to use here. Suggested filenames used by V4:
 
-`public/music/romantic.mp3`
+- romantic.mp3
+- missing-you.mp3
+- late-night.mp3
+- stay-with-me.mp3
 
-The player in `index.html` already points to this path. No third-party audio service or personal data is required.
+Missing tracks are handled gracefully by the Music Room.
