@@ -11,7 +11,7 @@ const document = {
   querySelector(s) { return s==='#thread'?thread:null; }
 };
 const window = { fetch: async()=>({ok:false,json:async()=>({})}), addEventListener(){} };
-const context = vm.createContext({window,document,localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k)},Date,Math,JSON,console,AbortSignal:{timeout:()=>undefined},location:{hostname:'github.io',protocol:'https:'}});
+const context = vm.createContext({window,document,localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k)},Date,Math,JSON,console,AbortSignal:{timeout:()=>undefined},location:{hostname:'github.io',protocol:'https:'},setTimeout});
 vm.runInContext(fs.readFileSync('public/v32.js','utf8'),context,{filename:'public/v32.js'});
 
 function ok(name, condition, detail='') { if(!condition) throw new Error(`${name}${detail?` — ${detail}`:''}`); console.log(`PASS ${name}`); }
