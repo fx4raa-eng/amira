@@ -10,7 +10,7 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
+a concurrency:
   group: pages
   cancel-in-progress: true
 
@@ -50,7 +50,7 @@ jobs:
         run: |
           grep -q 'v19.css?v=25' public/index.html
           grep -q 'v25.js?v=25' public/index.html
-          grep -q 'v33.js?v=33.2' public/index.html
+          grep -q 'v33.js?v=33.4' public/index.html
           grep -q 'v33_3.js?v=33.3' public/index.html
           grep -q 'v32.js?v=32' public/index.html
       - name: Setup GitHub Pages
