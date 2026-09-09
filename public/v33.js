@@ -1,0 +1,69 @@
+(()=>{'use strict';
+/* AmiRa V33.1 — Relationship Signal Engine
+   Conservative relational inference. It reads conversational evidence, not minds.
+   Goal: emotional appropriateness, not engagement maximisation.
+*/
+const KEY='amira_relationship_v33_1',clean=s=>String(s??'').trim().replace(/\s+/g,' '),low=s=>clean(s).toLowerCase();
+const clamp=(n,a=0,b=1)=>Math.max(a,Math.min(b,n));
+const RX={
+  affection:/\b(miss you|miss u|yaad aa|pyaar|love you|love u|hug|cuddle|kiss|jaan|baby|want you|need you|close|pass me|mere paas)\b/i,
+  reassurance:/\b(are you there|you still|do you love|love me|important|matter|leave me|forget me|ignore me|don't care|dont care|disappoint|not enough|enough for you|tumhe farak)\b/i,
+  protest:/\b(gussa tumse|angry with you|upset with you|hurt by you|tumne|tumhara|you never|you don't|you dont|why did you|kyun kiya|bura laga)\b/i,
+  withdrawal:/\b(don't talk|dont talk|abhi nahi|baad mein|baad me|later|leave me alone|mujhe akela|space|not now|no talking|chhod do|rehne do|kuch nahi|nothing)\b/i,
+  repair:/\b(sorry|maaf|forgive|meri galti|my mistake|i didn't mean|mera matlab|nahi mera matlab|actually|let's fix|theek karna|baat karte hain)\b/i,
+  playful:/\b(joke|funny|masti|tease|teasing|dare|challenge|game|hehe|haha|😂|😏|😉|lol|bore|boring|acha ji|pakdo|pagal)\b/i,
+  vulnerable:/\b(sad|dukhi|low|alone|lonely|akeli|cry|rona|anxious|insecure|scared|afraid|hurt|broken|overthink|disappointed|failure|worthless)\b/i,
+  proximity:/\b(come here|idhar aao|mere paas|wish you were|kaash tum|need you here|saath|with me|stay|mat jaana|don't go|dont go)\b/i,
+  tension:/\b(fight|argument|ladai|jhagda|problem between|weird between|distance|cold|ignore|ignored|annoyed|frustrated)\b/i
+};
+function read(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return{}}}
+let S={version:'33.1',turns:[],lastSignals:{},state:{approach:0.5,hold:0.5,soften:0.5,reassure:0.2,tease:0.1,space:0.1,repair:0.1,answer:0.5},...read()};
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch{}}
+function recent(messages){return Array.isArray(messages)?messages.slice(-8):[]}
+function detect(text,history=[]){
+ const l=low(text), out={affection:0,reassurance:0,protest:0,withdrawal:0,repair:0,playful:0,vulnerable:0,proximity:0,tension:0};
+ for(const k of Object.keys(out)) if(RX[k].test(l)) out[k]=1;
+ const prev=history.filter(x=>x&&x.role==='user').slice(-3).map(x=>low(x.text||x.content||'')).join(' ');
+ // Context modifies ambiguous language; it never creates a strong signal by itself.
+ if(/^(hmm+|acha|okay|ok|theek|haan|han|hmm\.?)$/.test(l)){
+   if(RX.protest.test(prev)||RX.tension.test(prev)) out.tension=Math.max(out.tension,.45),out.withdrawal=Math.max(out.withdrawal,.25);
+   else if(RX.playful.test(prev)||RX.affection.test(prev)) out.playful=Math.max(out.playful,.4);
+   else if(RX.vulnerable.test(prev)||RX.reassurance.test(prev)) out.vulnerable=Math.max(out.vulnerable,.4),out.approach=Math?.x;
+ }
+ if(text.length<22 && !out.playful && !out.repair && !out.protest && !out.withdrawal) out.ambiguous=.35; else out.ambiguous=0;
+ return out;
+}
+function posture(sig,intent){
+ const serious=sig.vulnerable||sig.protest||sig.tension||sig.withdrawal;
+ const p={approach:.35,hold:.45,soften:.3,reassure:0.1,tease:0.05,space:0.05,repair:0.05,answer:0.5};
+ if(['math','time','date','how','question'].includes(intent)) p.answer=.95;
+ if(sig.vulnerable){p.soften+=.5;p.approach+=.35;p.reassure+=.4;p.tease-=.05;p.space-=.05}
+ if(sig.affection||sig.proximity){p.approach+=.45;p.hold+=.25}
+ if(sig.reassurance){p.approach+=.3;p.reassure+=.55;p.tease-=.1}
+ if(sig.protest){p.soften+=.55;p.repair+=.35;p.reassure+=.25;p.tease-=.25}
+ if(sig.withdrawal){p.space+=.7;p.hold+=.25;p.tease-=.3;p.repair-=.05}
+ if(sig.repair){p.repair+=.65;p.soften+=.25;p.approach+=.2}
+ if(sig.playful&&!serious){p.tease+=.55;p.approach+=.2}
+ if(sig.tension&&!sig.protest){p.soften+=.3;p.hold+=.25;p.tease-=.2}
+ for(const k in p)p[k]=clamp(p[k]);
+ // Highest-priority behavioural posture. Answer remains independently available.
+ const order=['space','repair','reassure','soften','tease','approach','hold'];
+ let mode=order.reduce((best,k)=>p[k]>p[best]?k:best,order[0]);
+ if(sig.withdrawal)mode='space'; else if(sig.protest)mode='repair'; else if(sig.vulnerable)mode='soften'; else if(sig.repair)mode='repair'; else if(sig.playful&&!serious)mode='tease'; else if(sig.reassurance)mode='reassure'; else if(sig.affection||sig.proximity)mode='approach';
+ return {mode,scores:p};
+}
+function analyse(text,intent,messages){
+ const hist=recent(messages),sig=detect(text,hist),p=posture(sig,intent);
+ const prev=S.turns.at(-1)||{};
+ const same=(prev.intent===intent&&prev.mode===p.mode);
+ const result={version:'33.1',signals:sig,mode:p.mode,scores:p.scores,confidence:clamp(Object.values(sig).filter(Number).reduce((a,v)=>a+v,0)/3),ambiguous:!!sig.ambiguous,continuity:{previousMode:prev.mode||'',sameMode:same,turnsSinceChange: same?((prev.turnsSinceChange||0)+1):0},guidance:{
+   maxQuestions:(p.mode==='space'||p.mode==='soften'||p.mode==='repair')?0:1,
+   petName:(p.mode==='space')?'avoid':(p.mode==='soften'||p.mode==='reassure'?'light':'contextual'),
+   romance:(p.mode==='space'||p.mode==='soften'||p.mode==='repair')?'do-not-escalate':(sig.affection||sig.playful?'allowed':'earned'),
+   humour:(sig.vulnerable||sig.protest||sig.tension)?'restrained':(sig.playful?'allowed':'light'),
+   length:(p.mode==='space')?'brief':(sig.vulnerable||sig.protest)?'medium':'natural'
+ }};
+ S.lastSignals=result;S.turns=[...S.turns,{at:Date.now(),intent,mode:p.mode,signals:sig,turnsSinceChange:result.continuity.turnsSinceChange}].slice(-40);persist();return result;
+}
+window.AMIRA_RELATIONSHIP_SIGNAL={version:'33.1',analyse,read:()=>S,reset:()=>{S={version:'33.1',turns:[],lastSignals:{}};persist()}};
+})();
