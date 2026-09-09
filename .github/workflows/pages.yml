@@ -40,6 +40,8 @@ jobs:
         run: node qa/v33_6_human_journey_qa.mjs
       - name: Run V33.6.1 Human Awkwardness QA
         run: node qa/v33_6_1_human_awkwardness_qa.mjs
+      - name: Run V34 Experience Acceptance QA
+        run: node qa/v34_experience_acceptance_qa.mjs
       - name: Validate frontend files
         run: |
           test -f public/index.html
@@ -56,6 +58,7 @@ jobs:
           test -f public/manifest.webmanifest
           test -f qa/v33_6_human_journey_qa.mjs
           test -f qa/v33_6_1_human_awkwardness_qa.mjs
+          test -f qa/v34_experience_acceptance_qa.mjs
       - name: Check active conversation assets
         run: |
           grep -q 'v19.css?v=25' public/index.html
