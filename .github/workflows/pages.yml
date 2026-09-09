@@ -33,6 +33,8 @@ jobs:
           node --check public/v32.js
           node --check public/v33.js
           node --check public/v33_3.js
+      - name: Validate backend syntax
+        run: node --check server.js
       - name: Validate frontend files
         run: |
           test -f public/index.html
