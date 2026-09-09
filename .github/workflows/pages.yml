@@ -23,18 +23,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate active Hinglish V19 JavaScript
-        run: node --check public/v19-hinglish.js
+      - name: Validate active V22 JavaScript
+        run: |
+          node --check public/v22.js
+          node --check public/v23-hotfix.js
       - name: Validate frontend files
         run: |
           test -f public/index.html
+          test -f public/v22.js
+          test -f public/v23-hotfix.js
           test -f public/v19.css
-          test -f public/v19-hinglish.js
           test -f public/manifest.webmanifest
-      - name: Check active V19 assets
+      - name: Check active V22 assets
         run: |
-          grep -q 'v19.css' public/index.html
-          grep -q 'v19-hinglish.js' public/index.html
+          grep -q 'v19.css?v=22' public/index.html
+          grep -q 'v22.js?v=22' public/index.html
+          grep -q 'v23-hotfix.js?v=23' public/index.html
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload static AmiRa frontend
