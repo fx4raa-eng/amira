@@ -41,7 +41,7 @@ ok('factual answer has no romantic leakage', !/[❤️💕😘😏]/u.test(last)
 
 await submit('Acha ji 😂 aaj toh masti karni hai');
 last=messages().at(-1)?.text||'';
-ok('playful response is playful', /😂|masti|Rahul/i.test(last), `actual=${JSON.stringify(last)} tail=${JSON.stringify(messages().slice(-3))}`);
+ok('playful response is playful', /😂|masti|Rahul/i.test(last));
 
 await submit('Tumse gussa hoon');
 last=messages().at(-1)?.text||'';
