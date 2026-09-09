@@ -33,6 +33,7 @@ jobs:
           node --check public/v32.js
           node --check public/v33.js
           node --check public/v33_3.js
+          node --check public/v33_5.js
       - name: Validate backend syntax
         run: node --check server.js
       - name: Validate frontend files
@@ -46,6 +47,7 @@ jobs:
           test -f public/v32.js
           test -f public/v33.js
           test -f public/v33_3.js
+          test -f public/v33_5.js
           test -f public/v19.css
           test -f public/manifest.webmanifest
       - name: Check active conversation assets
@@ -54,6 +56,7 @@ jobs:
           grep -q 'v25.js?v=25' public/index.html
           grep -q 'v33.js?v=33.4' public/index.html
           grep -q 'v33_3.js?v=33.3' public/index.html
+          grep -q 'v33_5.js?v=33.5' public/index.html
           grep -q 'v32.js?v=32' public/index.html
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
