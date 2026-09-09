@@ -8,7 +8,8 @@ const input = { value:'' };
 const composer = { id:'composer', querySelector:s=>s==='#input'?input:null };
 const document = {
   addEventListener(type, fn) { (listeners[type] ||= []).push(fn); },
-  querySelector(s) { return s==='#thread'?thread:null; }
+  querySelector(s) { return s==='#thread'?thread:null; },
+  createElement() { return { className:'', innerHTML:'', appendChild(){}, textContent:'' }; }
 };
 const window = { fetch: async()=>({ok:false,json:async()=>({})}), addEventListener(){} };
 const context = vm.createContext({window,document,localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k)},Date,Math,JSON,console,AbortSignal:{timeout:()=>undefined},location:{hostname:'github.io',protocol:'https:'},setTimeout});
