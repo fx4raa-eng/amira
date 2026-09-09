@@ -28,19 +28,21 @@ jobs:
           node --check public/v25.js
           node --check public/v27.js
           node --check public/v28.js
+          node --check public/v29.js
       - name: Validate frontend files
         run: |
           test -f public/index.html
           test -f public/v25.js
           test -f public/v27.js
           test -f public/v28.js
+          test -f public/v29.js
           test -f public/v19.css
           test -f public/manifest.webmanifest
       - name: Check active conversation assets
         run: |
           grep -q 'v19.css?v=25' public/index.html
           grep -q 'v25.js?v=25' public/index.html
-          grep -q 'v28.js?v=28' public/index.html
+          grep -q 'v29.js?v=29' public/index.html
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload static AmiRa frontend
