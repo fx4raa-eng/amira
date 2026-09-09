@@ -1,4 +1,4 @@
-name: Deploy AmiRa V11 Romantic Hindi
+name: Deploy AmiRa V12 Human Touch
 
 on:
   push:
@@ -23,10 +23,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate AmiRa V11 JavaScript
-        run: node --check public/v11.js
-      - name: Validate AmiRa V11 frontend
-        run: test -f public/index.html && test -f public/v11.css && test -f public/v11.js && test -f public/manifest.webmanifest
+      - name: Validate AmiRa V12 JavaScript
+        run: node --check public/v12.js && node --check public/v12-bridge.js
+      - name: Validate AmiRa V12 frontend
+        run: test -f public/index.html && test -f public/v12.css && test -f public/v12.js && test -f public/v12-bridge.js && test -f public/manifest.webmanifest
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload static AmiRa frontend
