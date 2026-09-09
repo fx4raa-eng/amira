@@ -1,4 +1,4 @@
-name: Deploy AmiRa V8 to GitHub Pages
+name: Deploy AmiRa V9 to GitHub Pages
 
 on:
   push:
@@ -23,10 +23,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Validate JavaScript
-        run: node --check public/v8.js && node --check public/app.js
-      - name: Validate V8 frontend
-        run: test -f public/index.html && test -f public/v8.css && test -f public/v8.js && test -f public/manifest.webmanifest
+      - name: Validate V9 JavaScript
+        run: node --check public/v9.js
+      - name: Validate V9 frontend
+        run: test -f public/index.html && test -f public/v9.css && test -f public/v9.js && test -f public/manifest.webmanifest
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload static AmiRa frontend
