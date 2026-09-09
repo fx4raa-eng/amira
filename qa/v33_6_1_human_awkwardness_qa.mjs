@@ -36,7 +36,7 @@ ok('reassurance does not ask for a mode', !/choose a mode|what do you want me to
 
 await submit('17 × 24?');
 last=messages().at(-1)?.text||'';
-ok('factual answer is concise', last === 'Answer: 408.');
+ok('factual answer is concise', last === 'Answer: 408.', `actual=${JSON.stringify(last)} tail=${JSON.stringify(messages().slice(-3))}`);
 ok('factual answer has no romantic leakage', !/[❤️💕😘😏]/u.test(last));
 
 await submit('Acha ji 😂 aaj toh masti karni hai');
