@@ -48,7 +48,7 @@ jobs:
         run: |
           grep -q 'v19.css?v=25' public/index.html
           grep -q 'v25.js?v=25' public/index.html
-          grep -q 'v33.js?v=33.1' public/index.html
+          grep -q 'v33.js?v=33.2' public/index.html
           grep -q 'v32.js?v=32' public/index.html
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
