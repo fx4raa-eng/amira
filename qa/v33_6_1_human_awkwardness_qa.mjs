@@ -3,7 +3,7 @@ import vm from 'node:vm';
 
 const store = new Map();
 const listeners = {};
-const thread = { innerHTML:'', scrollTop:0, scrollHeight:0 };
+const thread = { innerHTML:'', scrollTop:0, scrollHeight:0, appendChild(){ this.scrollHeight+=1; } };
 const input = { value:'' };
 const composer = { id:'composer', querySelector:s=>s==='#input'?input:null };
 const document = {
