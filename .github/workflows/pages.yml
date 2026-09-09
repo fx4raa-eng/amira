@@ -36,6 +36,8 @@ jobs:
           node --check public/v33_5.js
       - name: Validate backend syntax
         run: node --check server.js
+      - name: Run V33.6 Human Journey QA
+        run: node qa/v33_6_human_journey_qa.mjs
       - name: Validate frontend files
         run: |
           test -f public/index.html
@@ -50,6 +52,7 @@ jobs:
           test -f public/v33_5.js
           test -f public/v19.css
           test -f public/manifest.webmanifest
+          test -f qa/v33_6_human_journey_qa.mjs
       - name: Check active conversation assets
         run: |
           grep -q 'v19.css?v=25' public/index.html
